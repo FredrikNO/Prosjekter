@@ -1,7 +1,7 @@
 // Sjekker om brukeren eksisterer og om passordet stemmer.
 function logginnUser() {
     for (let i = 0; i < userInfo.length; i++) {
-        if ((userInfo[i].userName === userName || userInfo[i].userEmail === userEmail) && (userInfo[i].password === userPassword)) {
+        if ((userInfo[i].userName === userName || userInfo[i].userEmail === userName) && (userInfo[i].password === userPassword)) {
             showScreen = 2;
             errorCode--;
         }
