@@ -1,16 +1,22 @@
 updateView();
 function updateView(){
     let html='';
-    if(showScreen==0){
-          html=loggInScreen();  
-    }
-    else if(showScreen==1){
-        html=newUserScreen();
-    }
-    else if(showScreen==2){
-        html=successfullyLoggedin();
-    }
 
+    switch (showScreen) {
+        case 'LoggIn':
+            html=loggInScreen(); 
+            break;
+        case 'RegisterUser':
+            html=newUserScreen();
+            break;
+        case 'SuccessFullyLoggedin':
+            html=successfullyLoggedin();
+            break;
+        default:
+            console.log(showScreen);
+            break;
+    }
+    
     document.getElementById('page').innerHTML=html;
 }
 function loggInScreen(){
