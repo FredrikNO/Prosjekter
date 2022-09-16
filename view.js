@@ -1,31 +1,39 @@
 updateView();
-function updateView(){
-    let html='';
+function mainView(){
+let html='';
+html=`
+<div>
+${model.view}
+</div>
+`;
+document.getElementById('page').innerHTML=html;
+}
 
-    switch (showScreen) {
+
+function updateView(){
+    switch (model.showScreen) {
         case 'LoggIn':
-            html=loggInScreen(); 
+            model.view=loggInScreen(); 
             break;
         case 'RegisterUser':
-            html=newUserScreen();
+            model.view=newUserScreen();
             break;
         case 'SuccessFullyLoggedin':
-            html=successfullyLoggedin();
+            model.view=successfullyLoggedin();
             break;
         default:
-            console.log(showScreen);
+            console.log(model.showScreen);
             break;
     }
-    
-    document.getElementById('page').innerHTML=html;
+    mainView();
 }
 function loggInScreen(){
     let html='';
     html=`
         <div class="container1">
-        <div class="fontFam">${makeUserErrorMessage||'Skriv inn brukernavn og passord'}</div><hr><br>
-        <input class="txtBoxes" type="text" placeholder="Brukernavn eller e-postadresse" oninput="userName=this.value"><br>
-        <input class="txtBoxes" type="text" placeholder="Passord" oninput="userPassword=this.value"><br>
+        <div class="fontFam">${model.makeUserErrorMessage||'Skriv inn brukernavn og passord'}</div><hr><br>
+        <input class="txtBoxes" type="text" placeholder="Brukernavn eller e-postadresse" oninput="model.loggin.userName=this.value"><br>
+        <input class="txtBoxes" type="text" placeholder="Passord" oninput="model.loggin.userPassword=this.value"><br>
         <button class="btnStyle1" onclick="logginnUser()">Logg inn</button> <br><hr><br>
         <button class="btnStyle2" onclick="changescreen()">Registrer ny bruker</button>
         </div>
@@ -36,13 +44,13 @@ function newUserScreen(){
     let html='';
     html=`
         <div class="container2">
-        <div class="fontFam">${makeUserErrorMessage||'Fyll ut inn info under '}</div><hr>
+        <div class="fontFam">${model.makeUserErrorMessage||'Fyll ut inn info under '}</div><hr>
 
-        <input class="txtBoxes2" type="text" placeholder="Ditt navn" oninput="personName=this.value" value="${personName||''}"><br>
-        <input class="txtBoxes2" type="text" placeholder="Brukernavn" oninput="userName=this.value" value="${userName||''}">
-        <input class="txtBoxes2" type="email" placeholder="E-postadresse" oninput="userEmail=this.value"value="${userEmail||''}">
-        <input class="txtBoxes2" type="text" placeholder="Passord" oninput="userPassword=this.value" value="${userPassword||''}">
-        <input class="txtBoxes2" type="text" placeholder="Bekreft passord" oninput="confirmingUserPassword=this.value" value="${confirmingUserPassword||''}"><br>
+        <input class="txtBoxes2" type="text" placeholder="Ditt navn" oninput="model.loggin.personName=this.value" value="${model.loggin.personName||''}"><br>
+        <input class="txtBoxes2" type="text" placeholder="Brukernavn" oninput="model.loggin.userName=this.value" value="${model.loggin.userName||''}">
+        <input class="txtBoxes2" type="email" placeholder="E-postadresse" oninput="model.loggin.userEmail=this.value"value="${model.loggin.userEmail||''}">
+        <input class="txtBoxes2" type="text" placeholder="Passord" oninput="model.loggin.userPassword=this.value" value="${model.loggin.userPassword||''}">
+        <input class="txtBoxes2" type="text" placeholder="Bekreft passord" oninput="model.loggin.confirmingUserPassword =this.value" value="${model.loggin.confirmingUserPassword||''}"><br>
         <button class="btnStyle1 fontFam" onclick="makeNewUser()">Registrer</button><br>
         <button class="btnStyle2" onclick="returnToLogIn()">Tilbake til logg inn</button>
         </div>
